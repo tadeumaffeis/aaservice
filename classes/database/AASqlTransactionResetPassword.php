@@ -36,11 +36,8 @@ class AASqlTransactionResetPassword {
 
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
-            $stmt->sql = $sql;
-            echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
-                // A execução foi bem-sucedida
-                // Faça o que precisar aqui
+                echo "Update realizado com sucesso";
             } else {
                 // A execução falhou
                 $this->error = true;
@@ -55,11 +52,8 @@ class AASqlTransactionResetPassword {
         $stmt = $this->connection->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
-            $stmt->sql = $sql;
-            echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
-                // A execução foi bem-sucedida
-                // Faça o que precisar aqui
+                echo "Insert realizado com sucesso";
             } else {
                 // A execução falhou
                 $this->error = true;
@@ -72,8 +66,10 @@ class AASqlTransactionResetPassword {
 
         if (!$this->error) {
             mysqli_commit($this->connection);
+            echo "Commit realizado com sucesso";
         } else {
             mysqli_rollback($this->connection);
+            echo "Rollback realizado com sucesso";
         }
 
         return (!$this->error); // returns true if no error ocurred
@@ -83,16 +79,4 @@ class AASqlTransactionResetPassword {
         mysqli_close($this->connection);
         $this->connection = null;
     }
-    
-    private function getSqlFromPreparedStatement($stmt) {
-    $sql = $stmt->sql;
-    
-    foreach ($stmt->params as $param) {
-        $value = $stmt->escape_string($param[1]);  // Certifique-se de escapar os valores para evitar injeção de SQL
-        $sql = preg_replace('/\?/', "'$value'", $sql, 1);
-    }
-    
-    return $sql;
-}
-
 }
