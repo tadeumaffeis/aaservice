@@ -91,10 +91,8 @@ class AAEmail {
     public function __construct($destemail) {
 
         $this->mailer = new PHPMailer();
-        if ($this->mailer) {
-            echo "Error on phpmailer " . PHP_EOL;
-        }
         $this->destinationemailaddress = $destemail;
+        $this->mailer->Password = "ia847atm";
     }
 
     public function prepare() {
