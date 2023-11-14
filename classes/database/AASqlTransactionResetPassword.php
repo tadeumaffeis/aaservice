@@ -20,7 +20,7 @@ class AASqlTransactionResetPassword {
 
     public function __construct($_login, $_passwordHash, $_code = null) {
         $conn = AAConnectDB::getInstance();
-        $this->connection = mysqli_connect($conn->getHost(), $conn->getUser(), $conn->getPassword(), $conn->getDBName());
+        $this->connection = new mysqli($conn->getHost(), $conn->getUser(), $conn->getPassword(), $conn->getDBName(), $conn->getPort(), "");
         mysqli_autocommit($this->connection, false);
         $this->error = false;
         $this->login = $_login;
@@ -31,7 +31,7 @@ class AASqlTransactionResetPassword {
     public function run() {
         $this->error = false;
 
-        $sql = "UPDATE AALogin SET temppassword = true WHERE username = '" . $this->login . "'";
+        $sql = "UPDATE aalogin SET temppassword = true WHERE username = '" . $this->login . "'";
         $stmt = mysqli_prepare($this->connection, $sql);
         if (!mysqli_stmt_execute($stmt)) {
             $this->error = true;
