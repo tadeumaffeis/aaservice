@@ -27,7 +27,7 @@ class AALoginGateway {
         $this->login = $login;
         $this->passwordHash = $passwordHash;
         $conn = AAConnectDB::getInstance();
-        $this->connection = mysqli_connect($conn->getHost(), $conn->getUser(), $conn->getPassword(), $conn->getDBName());
+        $this->connection = new mysqli($conn->getHost(), $conn->getUser(), $conn->getPassword(), $conn->getDBName(), $conn->getPort(), "");
         $this->code = $code;
     }
 

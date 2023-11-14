@@ -14,8 +14,8 @@ final class AAConnectDB {
 
     private static $instance = null;
     private static $connection = null;
-    // Local
-    private const SGBD_URI = "127.0.0.1";
+    // Remote mysqli
+    private const SGBD_URI = "aadb.mysql.uhserver.com";
     private const SGBD_DBNAME = "aadb";
     private const SGBD_DBUSER = "aadbuser";
     private const SGBD_PASSWD = "@IA847atm";
