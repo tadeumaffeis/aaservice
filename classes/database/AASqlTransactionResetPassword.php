@@ -36,7 +36,7 @@ class AASqlTransactionResetPassword {
 
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
-            var_dump($stmt);
+            echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
                 // Faça o que precisar aqui
@@ -54,7 +54,7 @@ class AASqlTransactionResetPassword {
         $stmt = $this->connection->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
-            var_dump($stmt);
+            echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
                 // Faça o que precisar aqui
@@ -81,5 +81,16 @@ class AASqlTransactionResetPassword {
         mysqli_close($this->connection);
         $this->connection = null;
     }
+    
+    private function getSqlFromPreparedStatement($stmt) {
+    $sql = $stmt->sql;
+    
+    foreach ($stmt->params as $param) {
+        $value = $stmt->escape_string($param[1]);  // Certifique-se de escapar os valores para evitar injeção de SQL
+        $sql = preg_replace('/\?/', "'$value'", $sql, 1);
+    }
+    
+    return $sql;
+}
 
 }
