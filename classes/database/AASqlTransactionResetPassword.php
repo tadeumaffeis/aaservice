@@ -37,14 +37,14 @@ class AASqlTransactionResetPassword {
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
             if ($stmt->execute()) {
-                echo "Update realizado com sucesso";
+                echo "Update realizado com sucesso" . PHP_EOL;
             } else {
-                // A execução falhou
+                echo "Update erro: " . $stmt->error . PHP_EOL;
                 $this->error = true;
             }
             $stmt->close(); // Fechar a declaração
         } else {
-            // A preparação da declaração falhou
+            echo "Update erro: " . $stmt->error . PHP_EOL;
             $this->error = true;
         }
 
@@ -53,23 +53,23 @@ class AASqlTransactionResetPassword {
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
             if ($stmt->execute()) {
-                echo "Insert realizado com sucesso";
+                echo "Insert realizado com sucesso" . PHP_EOL;
             } else {
-                // A execução falhou
+                echo "Insert erro: " . $stmt->error . PHP_EOL;
                 $this->error = true;
             }
             $stmt->close(); // Fechar a declaração
         } else {
-            // A preparação da declaração falhou
+            echo "Insert erro: " . $stmt->error . PHP_EOL;
             $this->error = true;
         }
 
         if (!$this->error) {
             mysqli_commit($this->connection);
-            echo "Commit realizado com sucesso";
+            echo "Commit realizado com sucesso" . PHP_EOL;
         } else {
             mysqli_rollback($this->connection);
-            echo "Rollback realizado com sucesso";
+            echo "Rollback realizado com sucesso" . PHP_EOL;
         }
 
         return (!$this->error); // returns true if no error ocurred
@@ -79,4 +79,5 @@ class AASqlTransactionResetPassword {
         mysqli_close($this->connection);
         $this->connection = null;
     }
+
 }
