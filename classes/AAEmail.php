@@ -118,6 +118,10 @@ class AAEmail {
         if ($this->mailer->send()) {
             $retValue = true;
         }
+        else
+        {
+            echo $this->mailer->ErrorInfo;
+        }
 
         return $retValue;
     }
