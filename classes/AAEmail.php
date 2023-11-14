@@ -91,9 +91,7 @@ class AAEmail {
     public function __construct($destemail) {
 
         $this->mailer = new PHPMailer();
-        var_dump($this->mailer);
-        if ($this->mailer)
-        {
+        if ($this->mailer) {
             echo "Error on phpmailer " . PHP_EOL;
         }
         $this->destinationemailaddress = $destemail;
@@ -116,15 +114,14 @@ class AAEmail {
 
     public function send() {
         $retValue = false;
+        var_dump($this->mailer);
         if (!$this->prepared) {
             return $retValue;
         }
 
         if ($this->mailer->send()) {
             $retValue = true;
-        }
-        else
-        {
+        } else {
             echo $this->mailer->ErrorInfo;
         }
 
