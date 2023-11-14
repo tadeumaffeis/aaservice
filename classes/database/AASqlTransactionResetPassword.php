@@ -31,17 +31,39 @@ class AASqlTransactionResetPassword {
     public function run() {
         $this->error = false;
 
-        $sql = "UPDATE aalogin SET temppassword = true WHERE username = '" . $this->login . "'";
+        $sql = "UPDATE aalogin SET temppassword = true WHERE username = ?";
         $stmt = $this->connection->prepare($sql);
-        if (!$stmt->execute($stmt)) {
+        if ($stmt) {
+            $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
+            if ($stmt->execute()) {
+                // A execução foi bem-sucedida
+                // Faça o que precisar aqui
+            } else {
+                // A execução falhou
+                $this->error = true;
+            }
+            $stmt->close(); // Fechar a declaração
+        } else {
+            // A preparação da declaração falhou
             $this->error = true;
         }
 
-        $sql = "INSERT INTO aatemppassword VALUES ('" . $this->login . "','" . $this->passwordHash . "')";
+        $sql = "INSERT INTO aatemppassword VALUES (?,?)";
         $stmt = $this->connection->prepare($sql);
-        if (!$stmt->execute($stmt)) {
+        if ($stmt) {
+            $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
+            if ($stmt->execute()) {
+                // A execução foi bem-sucedida
+                // Faça o que precisar aqui
+            } else {
+                // A execução falhou
+                $this->error = true;
+            }
+            $stmt->close(); // Fechar a declaração
+        } else {
+            // A preparação da declaração falhou
             $this->error = true;
-        } 
+        }
 
         if (!$this->error) {
             mysqli_commit($this->connection);
