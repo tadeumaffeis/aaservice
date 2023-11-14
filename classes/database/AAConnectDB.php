@@ -68,7 +68,8 @@ final class AAConnectDB {
     }
 
     public function getHost() {
-        return explode("=", self::SGBD_URI)[1];
+        //return explode("=", self::SGBD_URI)[1];
+        return self::SGBD_URI;
     }
 
     public function getUser() {
