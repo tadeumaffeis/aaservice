@@ -33,13 +33,13 @@ class AASqlTransactionResetPassword {
 
         $sql = "UPDATE aalogin SET temppassword = true WHERE username = '" . $this->login . "'";
         $stmt = $this->connection->prepare($sql);
-        if (!mysqli_stmt_execute($stmt)) {
+        if (!$stmt->execute($stmt)) {
             $this->error = true;
         }
 
         $sql = "INSERT INTO aatemppassword VALUES ('" . $this->login . "','" . $this->passwordHash . "')";
         $stmt = $this->connection->prepare($sql);
-        if (!mysqli_stmt_execute($stmt)) {
+        if (!$stmt->execute($stmt)) {
             $this->error = true;
         } 
 
