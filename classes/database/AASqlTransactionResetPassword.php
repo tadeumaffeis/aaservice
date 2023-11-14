@@ -41,7 +41,7 @@ class AASqlTransactionResetPassword {
         $stmt = mysqli_prepare($this->connection, $sql);
         if (!mysqli_stmt_execute($stmt)) {
             $this->error = true;
-        }
+        } 
 
         if (!$this->error) {
             mysqli_commit($this->connection);
