@@ -55,7 +55,7 @@ class AASqlTransactionResetPassword {
             if ($stmt->execute()) {
                 echo "Insert realizado com sucesso" . PHP_EOL;
             } else {
-                echo "Insert erro: " . $stmt->error . PHP_EOL;
+                echo "Insert erro: " . $stmt->error . " " . $stmt->errno . PHP_EOL;
                 $this->error = true;
             }
             $stmt->close(); // Fechar a declaração
