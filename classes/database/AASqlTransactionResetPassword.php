@@ -36,6 +36,7 @@ class AASqlTransactionResetPassword {
 
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
+            $stmt->sql = $sql;
             echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
@@ -54,6 +55,7 @@ class AASqlTransactionResetPassword {
         $stmt = $this->connection->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
+            $stmt->sql = $sql;
             echo $this->getSqlFromPreparedStatement($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
