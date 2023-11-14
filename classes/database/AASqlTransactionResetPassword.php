@@ -33,8 +33,10 @@ class AASqlTransactionResetPassword {
 
         $sql = "UPDATE aalogin SET temppassword = true WHERE username = ?";
         $stmt = $this->connection->prepare($sql);
+
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
+            var_dump($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
                 // Faça o que precisar aqui
@@ -52,6 +54,7 @@ class AASqlTransactionResetPassword {
         $stmt = $this->connection->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
+            var_dump($stmt);
             if ($stmt->execute()) {
                 // A execução foi bem-sucedida
                 // Faça o que precisar aqui
