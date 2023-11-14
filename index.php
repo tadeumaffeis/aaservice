@@ -288,7 +288,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
         }
 
     case "debug" : {
-            echo "\n" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
+            echo "<b>Version 1.0 - </b>" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
 
             /*
         
