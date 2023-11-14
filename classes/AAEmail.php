@@ -91,6 +91,7 @@ class AAEmail {
     public function __construct($destemail) {
 
         $this->mailer = new PHPMailer();
+        var_dump($this->mailer);
         if ($this->mailer)
         {
             echo "Error on phpmailer " . PHP_EOL;
