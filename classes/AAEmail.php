@@ -91,10 +91,10 @@ class AAEmail {
 
     public function __construct($destemail) {
 
-        $this->mailer = new PHPMailer(true);
-        $this->mailer->isSMTP();
-        $this->mailer->Host = 'smtp.atmapps.pro.br';
-        $this->mailer->SMTPAuth = true;
+        //$this->mailer = new PHPMailer(true);
+        //$this->mailer->isSMTP();
+        //$this->mailer->Host = 'smtp.atmapps.pro.br';
+        //$this->mailer->SMTPAuth = true;
         //$this->mailer->SMTPSecure = 'tls';
         $this->mailer->Port = 587;
         $this->destinationemailaddress = $destemail;
