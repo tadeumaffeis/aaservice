@@ -287,10 +287,10 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
         }
 
     case "debug" : {
-        $mailer = new AAEmail('tadeu.maffeis@gmail.com');
-        $mailer->sendEmail('tadeu.maffeis@gmail.com');
-    }
-        /*
+        //$mailer = new AAEmail('tadeu.maffeis@gmail.com');
+        //$mailer->sendEmail('tadeu.maffeis@gmail.com');
+    
+        
             echo "<b>Version 1.0 - </b>" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
             $mailer = new AAEmail('tadeu.maffeis@gmail.com');
             $mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
