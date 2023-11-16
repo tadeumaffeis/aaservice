@@ -1,6 +1,5 @@
 <?php
 
-
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 
@@ -208,7 +207,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 //var_dump(utf8_encode($result));
 
                 $jsonObj = new ReturnMessage(200, 'Sucessful');
-                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8',$result)));
+                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8', $result)));
             } catch (Exception $ex) {
 
                 $jsonObj = new ReturnMessage(500, 'Error on search data');
@@ -241,7 +240,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 //var_dump(utf8_encode($result));
 
                 $jsonObj = new ReturnMessage(200, 'Sucessful');
-                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8',$result)));
+                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8', $result)));
             } catch (Exception $ex) {
                 $jsonObj = new ReturnMessage(500, 'Error on search data');
             }
@@ -272,12 +271,12 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 $assignmentInfo['student_ar'] = $json_array['student_ar'];
                 $assignmentInfo['content'] = $json_array['content'];
 
-                $result = $loginUser->writeAssignmentFinished($assignmentInfo);             
-                
+                $result = $loginUser->writeAssignmentFinished($assignmentInfo);
+
                 if ($result == 200) {
                     $jsonObj = new ReturnMessage(200, 'Sucessful');
-                } 
-                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8',$result)));
+                }
+                $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8', $result)));
             } catch (Exception $ex) {
                 $jsonObj = new ReturnMessage($ex->getCode(), $ex->getMessage());
             }
@@ -289,111 +288,126 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
 
     case "debug" : {
             echo "<b>Version 1.0 - </b>" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
-
-            /*
-        
-            $obj = new AASqlTransactionGetStudentClassAssignment('tadeu.maffeis@fatec.sp.gov.br', "");
-            $jsonStr = $obj->run();
-
-            echo $jsonStr;
-
-            break;
-
-            
-              $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br", "AAAAAA", "95de8b4c24");
-
-              $result = $loginUser->updateTempPassword();
-
-              if ($result < 0) {
-              $jsonObj = new ReturnMessage(404, 'invalid code');
-              } else {
-              if ($result) {
-              $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
-              } else {
-              $jsonObj = new ReturnMessage(400, 'Error change to password');
-              }
-              }
-
-              echo $jsonObj->toJSON();
-
-
-              /*
-              $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br");
-              $result = $loginUser->existTempPassword();
-
-              if ($result) {
-              echo "\n\n***(Sucesso) Existe temppassword</p>";
-              } else {
-              echo "\n\n***Erro</p>";
-              }
-             */
-            break;
-        }
+            $mailer = new AAEmail('tadeu.maffeis@gmail.com');
+            $mailer->setSourcemailaddress("disciplinas.tadeu.maffeis@gmail.com");
+            $mailer->setSourcename("Disciplinas ADS-AMS");
+            $mailer->setSubject("Disciplinas - Reset Password!");
+            $html = "<html><head><meta charset=\"UTF-8\"></head><body>Código: <b>" . $newpassword . "</b><p>";
+            $html .= "<b>Este é o código para você realizar a redefinição de sua senha!</b></p><p>";
+            $html .= "</body></html>";
+            $mailer->setHtmlMessage($html);
+            $mailer->prepare();
+            if ($mailer->send()) {
+                $jsonObj = new ReturnMessage(200, 'Temporary password created');
+            } else {
+                $jsonObj = new ReturnMessage(404, 'Reset password failure');
+            }
+    }
+    echo $jsonObj->toJSON();
     /*
-      $json_array = json_decode(base64_decode(filter_input(INPUT_POST, 'json'), true), true);
-      $now = date('m-d-Y h:i:s a', time());
-      $newpassword = substr(sha1($now), 0, 10);
-      //
-      // Salvar senha para que no caso de falha ... possa-se recupera-la
-      //
-      $gateway = new AALoginGateway($json_array['username'], $newpassword);
 
-      if ($gateway->updatePassword()) {
-      $mailer = new AAEmail($json_array['username']);
-      $mailer->setSourcemailaddress("ed.ads.fitu@atmapps.pro.br");
-      $mailer->setSourcename("Disciplina Estrutura de Dados");
-      $mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
-      $html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
-      $html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
-      $html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
-      $mailer->setHtmlMessage($html);
-      $mailer->prepare();
+      $obj = new AASqlTransactionGetStudentClassAssignment('tadeu.maffeis@fatec.sp.gov.br', "");
+      $jsonStr = $obj->run();
 
-      if ($mailer->send()) {
-      $jsonObj = new ReturnMessage(200, 'Temporary password created');
-      } else {
-      $jsonObj = new ReturnMessage(404, 'Reset password failure');
-      }
-      } else {
-      $jsonObj = new ReturnMessage(400, 'temporary password not created');
-      }
-      echo $jsonObj->toJSON();
+      echo $jsonStr;
+
       break;
-      }
 
-     */
-    /*
-      if (!filter_has_var(INPUT_POST, 'json')) {
-      $jsonObj = new ReturnMessage(400, 'Failure on reset password');
-      echo $jsonObj->toJSON();
-      die();
-      }
-      $json_array = json_decode(base64_decode(filter_input(INPUT_POST, 'json'), true), true);
 
-      //$login = new Login($json_array['code'], $json_array['newpasswordHash']);
-      //
-      // Lógica para restar a senha
-      //
-      if ($login->isUserNameValid()) {
-      $jsonObj = new ReturnMessage(200, 'Username is valid');
+      $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br", "AAAAAA", "95de8b4c24");
+
+      $result = $loginUser->updateTempPassword();
+
+      if ($result < 0) {
+      $jsonObj = new ReturnMessage(404, 'invalid code');
       } else {
-      if ($login->existsStudent()) {
-      $jsonObj = new ReturnMessage(400, 'No login to ' . $json_array['username']);
-      }
-      else
-      {
-      $jsonObj = new ReturnMessage(404, 'Username ' . $json_array['username'] . ' is invalid');
+      if ($result) {
+      $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
+      } else {
+      $jsonObj = new ReturnMessage(400, 'Error change to password');
       }
       }
+
       echo $jsonObj->toJSON();
-      break;
-     * 
+
+
+      /*
+      $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br");
+      $result = $loginUser->existTempPassword();
+
+      if ($result) {
+      echo "\n\n***(Sucesso) Existe temppassword</p>";
+      } else {
+      echo "\n\n***Erro</p>";
+      }
      */
+    break;
 }
+/*
+  $json_array = json_decode(base64_decode(filter_input(INPUT_POST, 'json'), true), true);
+  $now = date('m-d-Y h:i:s a', time());
+  $newpassword = substr(sha1($now), 0, 10);
+  //
+  // Salvar senha para que no caso de falha ... possa-se recupera-la
+  //
+  $gateway = new AALoginGateway($json_array['username'], $newpassword);
+
+  if ($gateway->updatePassword()) {
+  $mailer = new AAEmail($json_array['username']);
+  $mailer->setSourcemailaddress("ed.ads.fitu@atmapps.pro.br");
+  $mailer->setSourcename("Disciplina Estrutura de Dados");
+  $mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
+  $html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
+  $html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
+  $html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
+  $mailer->setHtmlMessage($html);
+  $mailer->prepare();
+
+  if ($mailer->send()) {
+  $jsonObj = new ReturnMessage(200, 'Temporary password created');
+  } else {
+  $jsonObj = new ReturnMessage(404, 'Reset password failure');
+  }
+  } else {
+  $jsonObj = new ReturnMessage(400, 'temporary password not created');
+  }
+  echo $jsonObj->toJSON();
+  break;
+  }
+
+ */
+/*
+  if (!filter_has_var(INPUT_POST, 'json')) {
+  $jsonObj = new ReturnMessage(400, 'Failure on reset password');
+  echo $jsonObj->toJSON();
+  die();
+  }
+  $json_array = json_decode(base64_decode(filter_input(INPUT_POST, 'json'), true), true);
+
+  //$login = new Login($json_array['code'], $json_array['newpasswordHash']);
+  //
+  // Lógica para restar a senha
+  //
+  if ($login->isUserNameValid()) {
+  $jsonObj = new ReturnMessage(200, 'Username is valid');
+  } else {
+  if ($login->existsStudent()) {
+  $jsonObj = new ReturnMessage(400, 'No login to ' . $json_array['username']);
+  }
+  else
+  {
+  $jsonObj = new ReturnMessage(404, 'Username ' . $json_array['username'] . ' is invalid');
+  }
+  }
+  echo $jsonObj->toJSON();
+  break;
+ * 
+ */
+
 
 function debug($maiiler) {
 
-    $mailer->getHtmlMessage();
+$mailer->getHtmlMessage();
 
-    die();
+die();
 }
