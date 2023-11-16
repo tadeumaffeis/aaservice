@@ -10,9 +10,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/Exception.php';
+require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/PHPMailer.php';
+require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/SMTP.php';
 
 /**
  * Description of AAEmail
