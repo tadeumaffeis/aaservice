@@ -101,7 +101,7 @@ class AAEmail {
         $this->mailer->Port = 587;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->destinationemailaddress = $destemail;
-        $this->mailer->Password = '@IA847atm';
+        $this->mailer->Password = 'ia847atm';
     }
 
     public function prepare() {
