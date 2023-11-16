@@ -5,8 +5,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
-require_once 'phpmailer/class.phpmailer.php';
-require_once 'phpmailer/class.smtp.php';
+require_once 'PHPMailer/PHPMailer.php';
+require_once 'PHPMailer/SMTP.php';
 
 /**
  * Description of AAEmail
@@ -91,14 +91,15 @@ class AAEmail {
 
     public function __construct($destemail) {
 
-        $this->mailer = new PHPMailer(true);
-        $this->mailer->SMTPDebug = 2; 
+        $this->mailer = new PHPMailer(true); 
+        $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->mailer->isSMTP();
         $this->mailer->Username = 'aaclassroom@atmapps.pro.br';
         $this->mailer->Host = 'smtp.atmapps.pro.br';
         $this->mailer->SMTPAuth = true;
-        $this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = 587;
+        //$this->mailer->SMTPSecure = 'tls';
+        $this->mailer->Port = 465; //587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->destinationemailaddress = $destemail;
         $this->mailer->Password = '@IA847atm';
     }
