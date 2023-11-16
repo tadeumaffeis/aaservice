@@ -98,7 +98,7 @@ class AAEmail {
         $this->mailer->Host = 'smtp.google.com';
         $this->mailer->SMTPAuth = true;
         //$this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = 465; //587;
+        $this->mailer->Port = /* 465 ; */ 587;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->destinationemailaddress = $destemail;
         $this->mailer->Password = 'IAatm874150631$';
