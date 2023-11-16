@@ -6,13 +6,7 @@
  */
 
 //Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/Exception.php';
-require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/PHPMailer.php';
-require '/var/www/html/atmapps.pro.br/web/aaservice/classes/PHPMailer/src/SMTP.php';
+require 'vendor/autoload.php';
 
 /**
  * Description of AAEmail
