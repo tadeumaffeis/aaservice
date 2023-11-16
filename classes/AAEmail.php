@@ -98,8 +98,8 @@ class AAEmail {
         $this->mailer->Host = 'smtp.atmapps.pro.br';
         $this->mailer->SMTPAuth = true;
         //$this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = 465; //587;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mailer->Port = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->destinationemailaddress = $destemail;
         $this->mailer->Password = '@IA847atm';
     }
