@@ -89,10 +89,6 @@ class AAEmail {
         $this->altMessage = $altMessage;
     }
 
-    public function setMailer($mailer) {
-        $this->mailer = $mailer;
-    }
-
     public function __construct($destemail) {
 
         $this->mailer = new PHPMailer(true); 
