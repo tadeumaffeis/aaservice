@@ -289,7 +289,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
     case "debug" : {
             echo "<b>Version 1.0 - </b>" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
             $mailer = new AAEmail('tadeu.maffeis@gmail.com');
-            $mailer->setSourcemailaddress("disciplinas.tadeu.maffeis@gmail.com");
+            $mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
             $mailer->setSourcename("Disciplinas ADS-AMS");
             $mailer->setSubject("Disciplinas - Reset Password!");
             $html = "<html><head><meta charset=\"UTF-8\"></head><body>Código: <b>" . $newpassword . "</b><p>";
