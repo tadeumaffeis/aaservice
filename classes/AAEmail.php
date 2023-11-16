@@ -92,6 +92,7 @@ class AAEmail {
     public function __construct($destemail) {
 
         $this->mailer = new PHPMailer(true);
+        $this->mailer->SMTPDebug = 2; 
         $this->mailer->isSMTP();
         $this->mailer->Username = 'aaclassroom@atmapps.pro.br';
         $this->mailer->Host = 'smtp.atmapps.pro.br';
