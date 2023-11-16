@@ -93,8 +93,8 @@ class AAEmail {
 
         $this->mailer = new PHPMailer(true);
         $this->mailer->isSMTP();
-        $this->mailer->Username = 'disciplinas.tadeu.maffeis@fatec.sp.gov.br';
-        $this->mailer->Host = 'smtp.google.com';
+        $this->mailer->Username = 'disciplinas.tadeu.maffeis@gmail.com';
+        $this->mailer->Host = 'smtp.gmail.com';
         $this->mailer->SMTPAuth = true;
         $this->mailer->SMTPSecure = 'tls';
         $this->mailer->Port = 587;
