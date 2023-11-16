@@ -94,14 +94,14 @@ class AAEmail {
         $this->mailer = new PHPMailer(true); 
         $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->mailer->isSMTP();
-        $this->mailer->Username = 'aaclassroom@atmapps.pro.br';
-        $this->mailer->Host = 'smtp.atmapps.pro.br';
+        $this->mailer->Username = 'disciplinas.tadeu.maffeis@gmail.com';
+        $this->mailer->Host = 'smtp.google.com';
         $this->mailer->SMTPAuth = true;
         //$this->mailer->SMTPSecure = 'tls';
         $this->mailer->Port = 465; //587;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->destinationemailaddress = $destemail;
-        $this->mailer->Password = '@IA847atm';
+        $this->mailer->Password = 'IAatm874150631$';
     }
 
     public function prepare() {
