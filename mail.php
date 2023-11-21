@@ -10,16 +10,16 @@ if (isset($_POST['enviarFormulario'])){
 /*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
 
 
-$enviaFormularioParaNome = 'Nome do destinatário que receberá formulário';
+$enviaFormularioParaNome = 'Antonio Tadeu Maffeis';
 
-$enviaFormularioParaEmail = 'email-do-destinatario@dominio';
+$enviaFormularioParaEmail = 'tadeu.maffeis@gmail.com';
 
 
 $caixaPostalServidorNome = 'WebSite | Formulário';
 
-$caixaPostalServidorEmail = 'usuario@seudominio.com.br';
+$caixaPostalServidorEmail = 'aaclassroom@atmapps.pro.br';
 
-$caixaPostalServidorSenha = 'senha';
+$caixaPostalServidorSenha = 'ia847atm';
 
 
 /*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
