@@ -10,8 +10,8 @@ $mail = new PHPMailer(true);
 
 try {
     // Configurações do servidor de e-mail
-    //$mail->isSMTP();
-    $mail->IsSendmail();
+    $mail->isSMTP();
+    //$mail->IsSendmail();
     $mail->Host = 'smtp.atmapps.pro.br';
     $mail->Port = 587; 			// A porta SMTP pode variar (587 é comum para TLS)
     //$mail->SMTPSecure = 'tls'; 	// Use 'tls' ou 'ssl' conforme necessário
@@ -33,3 +33,5 @@ try {
     var_dump($ex);
 }
 ?>
+
+// v=spf1include:outlook.com include:spf.whservidor.com ~all
