@@ -56,9 +56,9 @@ $mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
 
 require ('classes/phpmailer/class.phpmailer.php');
 
-
 $mail = new PHPMailer();
 
+$mail->SMTPDebug = 2;
 
 $mail->IsSMTP();
 
