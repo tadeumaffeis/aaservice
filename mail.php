@@ -159,10 +159,15 @@ class AAEmail {
 
 //send the message, check for errors
 
+	try {
+
         if (!$mail->send()) {
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
             echo 'Message sent!';
+        }
+        } catch (Exception $ex) {
+          var_dump($ex);
         }
     }
 
