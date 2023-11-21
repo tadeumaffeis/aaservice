@@ -82,6 +82,9 @@ $mail->Body  = utf8_decode($mensagemConcatenada);
 
 $mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
 
+$mail->SMTPDebug = 2;
+
+var_dump($mail);
 
 if(!$mail->Send()){
 
