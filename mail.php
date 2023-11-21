@@ -142,7 +142,7 @@ $html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
 $html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
 $html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
 $mailer->setHtmlMessage($html);
-echo "\nhtml msg = " . $html . '<p>;
+echo "\nhtml msg = " . $html . '<p>';
 $mailer->prepare();
 echo "\nPrepare <p>";
 
