@@ -138,39 +138,31 @@ class AAEmail {
 
     public function sendEmail($dest) {
 
-
-//Create a new PHPMailer instance
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
+	$mail->Host = 'smtp.atmapps.pro.br';
+        $mail->Username = 'aaclassroom@atmapps.pro.br';
+        $mail->Password = 'IAatm874150631$';
+        $this->mailer->isSMTP();
+        $this->mailer->SMTPAuth = true;
+        //$this->mailer->SMTPSecure = 'tls';
+        $this->mailer->Port = 587;
+        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->SMTPDebug = 2;
-//Set who the message is to be sent from
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
-//Set an alternative reply-to address
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
-//Set who the message is to be sent to
         $mail->addAddress($dest, 'Tadeu');
-//Set the subject line
         $mail->Subject = 'PHPMailer mail() test';
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
         $mail->msgHTML("<html><body><b>Teste</b></body></hmtl>", __DIR__);
-//Replace the plain text body with one created manually
         $mail->AltBody = 'This is a plain-text message body';
-//Attach an image file
-        //$mail->addAttachment('images/phpmailer_mini.png');
-
-//send the message, check for errors
 
 	try {
-
-	var_dump($mail);
-
-        if (!$mail->send()) {
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            echo 'Message sent!';
-        }
+        	if (!$mail->send()) {
+            		echo 'Mailer Error: ' . $mail->ErrorInfo;
+        	} else {
+            		echo 'Message sent!';
+       		}
         } catch (Exception $ex) {
-          var_dump($ex);
+          	var_dump($ex);
         }
     }
 
