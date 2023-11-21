@@ -92,6 +92,7 @@ class AAEmail {
 
     public function __construct($destemail) {
 
+        /*
         $this->mailer = new PHPMailer(true);
         $this->mailer->SMTPDebug = 2;
         $this->mailer->isSMTP();
@@ -103,6 +104,7 @@ class AAEmail {
         //$this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->destinationemailaddress = $destemail;
         $this->mailer->Password = 'IAatm874150631$';
+        */
     }
 
     public function prepare() {
