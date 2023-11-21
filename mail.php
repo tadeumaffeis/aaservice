@@ -29,7 +29,7 @@ try {
     $mail->send();
     echo 'E-mail enviado com sucesso!';
 } catch (Exception $e) {
-    echo 'Erro ao enviar e-mail: ' . $mail->ErrorInfo;
+    //echo 'Erro ao enviar e-mail: ' . $mail->ErrorInfo;
     var_dump($ex);
 }
 ?>
