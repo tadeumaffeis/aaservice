@@ -161,6 +161,8 @@ class AAEmail {
 
 	try {
 
+	var_dump($mail);
+
         if (!$mail->send()) {
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
