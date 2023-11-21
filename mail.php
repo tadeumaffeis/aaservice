@@ -141,6 +141,7 @@ class AAEmail {
 
 //Create a new PHPMailer instance
         $mail = new PHPMailer();
+        $mail->SMTPDebug = 2;
 //Set who the message is to be sent from
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
 //Set an alternative reply-to address
