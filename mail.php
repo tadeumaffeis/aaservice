@@ -1,153 +1,149 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
 
-require_once 'classes/phpmailer/class.phpmailer.php';
+/* apenas dispara o envio do formulário caso exista $_POST['enviarFormulario']*/
 
-/**
- * Description of AAEmail
- *
- * @author Juli e Marina
- */
-class AAEmail {
 
-    private $prepared = false;
-    private $destinationemailaddress = null;
-    private $destinationname = null;
-    private $sourcemailaddress = null;
-    private $sourcename = null;
-    private $htmlMessage = null;
-    private $altMessage = null;
-    private $mailer = null;
-    private $subject = null;
+if (isset($_POST['enviarFormulario'])){
 
-    public function getSubject() {
-        return $this->subject;
-    }
 
-    public function setSubject($subject) {
-        $this->subject = $subject;
-    }
+/*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
 
-    public function getDestinationemailaddress() {
-        return $this->destinationemailaddress;
-    }
 
-    public function getDestinationname() {
-        return $this->destinationname;
-    }
+$enviaFormularioParaNome = 'Nome do destinatário que receberá formulário';
 
-    public function getSourcemailaddress() {
-        return $this->sourcemailaddress;
-    }
+$enviaFormularioParaEmail = 'email-do-destinatario@dominio';
 
-    public function getSourcename() {
-        return $this->sourcename;
-    }
 
-    public function getHtmlMessage() {
-        return $this->htmlMessage;
-    }
+$caixaPostalServidorNome = 'WebSite | Formulário';
 
-    public function getAltMessage() {
-        return $this->altMessage;
-    }
+$caixaPostalServidorEmail = 'usuario@seudominio.com.br';
 
-    public function getMailer() {
-        return $this->mailer;
-    }
+$caixaPostalServidorSenha = 'senha';
 
-    public function setDestinationemailaddress($destinationemailaddress) {
-        $this->destinationemailaddress = $destinationemailaddress;
-    }
 
-    public function setDestinationname($destinationname) {
-        $this->destinationname = $destinationname;
-    }
+/*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
 
-    public function setSourcemailaddress($sourcemailaddress) {
-        $this->sourcemailaddress = $sourcemailaddress;
-    }
 
-    public function setSourcename($sourcename) {
-        $this->sourcename = $sourcename;
-    }
+/* abaixo as variaveis principais, que devem conter em seu formulario*/
 
-    public function setHtmlMessage($htmlMessage) {
-        $this->htmlMessage = $htmlMessage;
-    }
 
-    public function setAltMessage($altMessage) {
-        $this->altMessage = $altMessage;
-    }
+$remetenteNome  = $_POST['remetenteNome'];
 
-    public function setMailer($mailer) {
-        $this->mailer = $mailer;
-    }
+$remetenteEmail = $_POST['remetenteEmail'];
 
-    public function __construct($destemail) {
+$assunto  = $_POST['assunto'];
 
-	try {
-        	$this->mailer = new PHPMailer();
-	} catch (Exception $ex) {
-		var_dump($ex);
-        }
-	$this->mailer->SMTPDebug = 2;
-        $this->destinationemailaddress = $destemail;
-    }
+$mensagem = $_POST['mensagem'];
 
-    public function prepare() {
-        $this->mailer->setFrom($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->AddReplyTo($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->addAddress($this->destinationemailaddress, $this->destinationname);
-        $this->mailer->Subject = $this->subject;
-        //
-        if ($this->htmlMessage != null) {
-            $this->mailer->MsgHTML($this->htmlMessage);
-        }
-        if ($this->altMessage == null) {
-            $this->mailer->AltBody = $this->altMessage;
-        }
-        $this->prepared = true;
-    }
 
-    public function send() {
-        $retValue = false;
-        if (!$this->prepared) {
-            return $retValue;
-        }
+$mensagemConcatenada = 'Formulário gerado via website'.'<br/>';
 
-        $this->mailer->SMTPDebug = 2;
+$mensagemConcatenada .= '-------------------------------<br/><br/>';
 
-        if ($this->mailer->send()) {
-            $retValue = true;
-        }
+$mensagemConcatenada .= 'Nome: '.$remetenteNome.'<br/>';
 
-        return $retValue;
-    }
+$mensagemConcatenada .= 'E-mail: '.$remetenteEmail.'<br/>';
 
-    //put your code here
+$mensagemConcatenada .= 'Assunto: '.$assunto.'<br/>';
+
+$mensagemConcatenada .= '-------------------------------<br/><br/>';
+
+$mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
+
+/*********************************** A PARTIR DAQUI NAO ALTERAR ************************************/
+
+
+require ('PHPMailer_5.2.4/class.phpmailer.php');
+
+
+$mail = new PHPMailer();
+
+
+$mail->IsSMTP();
+
+$mail->SMTPAuth  = true;
+
+$mail->Charset   = 'utf8_decode()';
+
+$mail->Host  = 'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
+
+$mail->Port  = '587';
+
+$mail->Username  = $caixaPostalServidorEmail;
+
+$mail->Password  = $caixaPostalServidorSenha;
+
+$mail->From  = $caixaPostalServidorEmail;
+
+$mail->FromName  = utf8_decode($caixaPostalServidorNome);
+
+$mail->IsHTML(true);
+
+$mail->Subject  = utf8_decode($assunto);
+
+$mail->Body  = utf8_decode($mensagemConcatenada);
+
+
+$mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
+
+
+if(!$mail->Send()){
+
+$mensagemRetorno = 'Erro ao enviar formulário: '. print($mail->ErrorInfo);
+
+}else{
+
+$mensagemRetorno = 'Formulário enviado com sucesso!';
+
+}
+
+}
+
+?>
+
+
+<html lang="pt-BR">
+
+
+<head>
+
+    <meta charset="utf-8">
+
+<title>Formulário Exemplo Autenticado</title>
+
+</head>
+
+<body>
+
+
+<?php
+
+if(isset($mensagemRetorno)){
+
+echo $mensagemRetorno;
+
 }
 
 
+?>
 
-$newpassword = "AAABBB";
-$mailer = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
-$mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
-echo "\nName = Disciplina Estrutura de Dados<p>";
-$mailer->setSourcename("Disciplina Estrutura de Dados");
-echo "\nSubject = Disciplina Estrutura de Dados - Reset Password!<p>";
-$mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
-$html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
-$html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
-$html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
-$mailer->setHtmlMessage($html);
-echo "\nhtml msg = " . $html . "<p>";
-$mailer->prepare();
-echo "\nPrepare <p>";
+<form method="POST" action="" style="width:300px;">
 
-echo $mailer->send();
+<input type="text" name="remetenteNome" placeholder="Nome completo" style="float:left;margin:10px;">
+
+<input type="text" name="remetenteEmail" placeholder="Email" style="float:left;margin:10px;">
+
+<input type="text" name="assunto" placeholder="Assunto" style="float:left;margin:10px;">
+
+<textarea name="mensagem" placeholder="Mensagem" style="float:left;margin:10px;height:100px;width:200px;"></textarea>
+
+<input type="submit" value="enviar" name="enviarFormulario" style="float:left;margin:10px;">
+
+</form>
+
+
+</body>
+
+</html>
 
