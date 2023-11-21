@@ -93,7 +93,7 @@ class AAEmail {
     public function __construct($destemail) {
 
         
-        //$this->mailer = new PHPMailer(true);
+        /*$this->mailer = new PHPMailer(true);*/
         //$this->mailer->SMTPDebug = 2;
         //$this->mailer->isSMTP();
         //$this->mailer->Username = 'disciplinas.tadeu.maffeis@gmail.com';
