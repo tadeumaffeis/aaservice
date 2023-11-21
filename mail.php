@@ -90,9 +90,12 @@ class AAEmail {
 
     public function __construct($destemail) {
 
-        $this->mailer = new PHPMailer();
-	
-
+	try {
+        	$this->mailer = new PHPMailer();
+	} catch (Exception $ex) {
+		var_dump($ex);
+        }
+	$this->mailer->SMTPDebug = 2;
         $this->destinationemailaddress = $destemail;
     }
 
