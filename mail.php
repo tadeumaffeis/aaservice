@@ -19,7 +19,7 @@ $caixaPostalServidorNome = 'WebSite | Formulário';
 
 $caixaPostalServidorEmail = 'aaclassroom@atmapps.pro.br';
 
-$caixaPostalServidorSenha = '@IA847atm';
+$caixaPostalServidorSenha = base64_encode('@IA847atm');
 
 
 /*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
