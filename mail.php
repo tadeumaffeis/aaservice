@@ -143,11 +143,11 @@ class AAEmail {
 	$mail->Host = 'smtp.atmapps.pro.br';
         $mail->Username = 'aaclassroom@atmapps.pro.br';
         $mail->Password = 'IAatm874150631$';
-        $this->mailer->isSMTP();
-        $this->mailer->SMTPAuth = true;
-        //$this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = 587;
-        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->isSMTP();
+        $mail->SMTPAuth = true;
+        //$mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
         $mail->addAddress($dest, 'Tadeu');
@@ -166,8 +166,10 @@ class AAEmail {
         }
     
 
+        echo "<p>";
+
         foreach (get_object_vars($mail) as $property => $value) {
-    	   echo "$property: $value<br>";
+    	   echo "$property --> $value<br>";
         }
 
     }
