@@ -146,7 +146,7 @@ class AAEmail {
         $mail->isSMTP();
         $mail->SMTPAuth = true;
         //$mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        //$mail->Port = 587;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
