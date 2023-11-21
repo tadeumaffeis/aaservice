@@ -103,11 +103,11 @@ die(0);
 //This should be done in your php.ini, but this is how to do it if you don't have access to that
 date_default_timezone_set('Etc/UTC');
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+//use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\SMTP;
 
 
-require 'classes/vendor/autoload.php';
+//require 'classes/vendor/autoload.php';
 
 
 //Create a new PHPMailer instance
