@@ -141,13 +141,12 @@ class AAEmail {
     }
 
     public function sendEmail($dest) {
-
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 2;
 	$mail->Host = 'smtp.atmapps.pro.br';
 	$mail->Charset   = 'utf8_decode()';
         $mail->Username = 'aaclassroom@atmapps.pro.br';
-        $mail->Password = 'IAatm874150631$';
+        $mail->Password = '@IA847atm';
         $mail->isSMTP();
         $mail->SMTPAuth = true;
         //$mail->SMTPSecure = 'tls';
