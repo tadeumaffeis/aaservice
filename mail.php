@@ -149,7 +149,7 @@ class AAEmail {
         $mail->Password = '@IA847atm';
         $mail->isSMTP();
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+        //$mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 	$mail->IsHTML(true);
         //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
