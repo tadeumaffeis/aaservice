@@ -1,201 +1,150 @@
 <?php
 
-$enviaFormularioParaNome = 'Antonio Tadeu Maffeis';
-
-$enviaFormularioParaEmail = 'tadeu.maffeis@gmail.com';
-
-
-$caixaPostalServidorNome = 'WebSite | Formulário';
-
-$caixaPostalServidorEmail = 'aaclassroom@atmapps.pro.br';
-
-$caixaPostalServidorSenha = 'IAatm874150631$';
-
-
-/*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
-
-
-/* abaixo as variaveis principais, que devem conter em seu formulario*/
-
-
-$remetenteNome  = "Antonio Tadeu Maffeis";
-
-$remetenteEmail = "aaclassroom@atmapps.pro.br";
-
-$assunto  = "Teste de e-mail";
-
-$mensagem = "<html><body><b>Teste</b></body></html>";
-
-
-$mensagemConcatenada = 'Formulário gerado via website'.'<br/>';
-
-$mensagemConcatenada .= '-------------------------------<br/><br/>';
-
-$mensagemConcatenada .= 'Nome: '.$remetenteNome.'<br/>';
-
-$mensagemConcatenada .= 'E-mail: '.$remetenteEmail.'<br/>';
-
-$mensagemConcatenada .= 'Assunto: '.$assunto.'<br/>';
-
-$mensagemConcatenada .= '-------------------------------<br/><br/>';
-
-$mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
-
-
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-
-
-require 'classes/vendor/autoload.php';
-
-
-$mail = new PHPMailer();
-
-
-$mail->IsSMTP();
-
-$mail->SMTPAuth  = true;
-
-$mail->Charset   = 'utf8_decode()';
-
-$mail->Host  = "smtp.atmapps.pro.br";
-
-//'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
-
-$mail->Port  = '587';
-
-$mail->Username  = $caixaPostalServidorEmail;
-
-$mail->Password  = $caixaPostalServidorSenha;
-
-$mail->From  = $caixaPostalServidorEmail;
-
-$mail->FromName  = utf8_decode($caixaPostalServidorNome);
-
-$mail->IsHTML(true);
-
-$mail->Subject  = utf8_decode($assunto);
-
-$mail->Body  = utf8_decode($mensagemConcatenada);
-
-
-$mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
-
-$mail->SMTPDebug = 2;
-
-var_dump($mail);
-
-if(!$mail->Send()){
-
-$mensagemRetorno = 'Erro ao enviar formulário: '. print($mail->ErrorInfo);
-
-}else{
-
-$mensagemRetorno = 'Formulário enviado com sucesso!';
-
-}
-
-die(0);
-
-
-/**
- * This example shows settings to use when sending via Google's Gmail servers.
- * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
-//SMTP needs accurate times, and the PHP time zone MUST be set
-//This should be done in your php.ini, but this is how to do it if you don't have access to that
-date_default_timezone_set('Etc/UTC');
+require_once 'classes/phpmailer/class.phpmailer.php';
 
+/**
+ * Description of AAEmail
+ *
+ * @author Juli e Marina
+ */
+class AAEmail {
 
+    private $prepared = false;
+    private $destinationemailaddress = null;
+    private $destinationname = null;
+    private $sourcemailaddress = null;
+    private $sourcename = null;
+    private $htmlMessage = null;
+    private $altMessage = null;
+    private $mailer = null;
+    private $subject = null;
 
+    public function getSubject() {
+        return $this->subject;
+    }
 
-//Create a new PHPMailer instance
-$mail = new PHPMailer;
+    public function setSubject($subject) {
+        $this->subject = $subject;
+    }
 
-//Tell PHPMailer to use SMTP
-$mail->isSMTP();
+    public function getDestinationemailaddress() {
+        return $this->destinationemailaddress;
+    }
 
-//Enable SMTP debugging
-// 0 = off (for production use)
-// 1 = client messages
-// 2 = client and server messages
-$mail->SMTPDebug = 2;
+    public function getDestinationname() {
+        return $this->destinationname;
+    }
 
-//Ask for HTML-friendly debug output
-$mail->Debugoutput = 'html';
+    public function getSourcemailaddress() {
+        return $this->sourcemailaddress;
+    }
 
-//Set the hostname of the mail server
-$mail->Host = 'smtp.atmapps.pro.br';
-// use
-// $mail->Host = gethostbyname('smtp.gmail.com');
-// if your network does not support SMTP over IPv6
+    public function getSourcename() {
+        return $this->sourcename;
+    }
 
-//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-$mail->Port = 587;
+    public function getHtmlMessage() {
+        return $this->htmlMessage;
+    }
 
-//Set the encryption system to use - ssl (deprecated) or tls
-$mail->SMTPSecure = 'tls';
+    public function getAltMessage() {
+        return $this->altMessage;
+    }
 
-//Whether to use SMTP authentication
-$mail->SMTPAuth = true;
+    public function getMailer() {
+        return $this->mailer;
+    }
 
-//Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "aaclassroom@atmapps.pro.br";
+    public function setDestinationemailaddress($destinationemailaddress) {
+        $this->destinationemailaddress = $destinationemailaddress;
+    }
 
-//Password to use for SMTP authentication
+    public function setDestinationname($destinationname) {
+        $this->destinationname = $destinationname;
+    }
 
-$mail->Password = "@IA847atm";
+    public function setSourcemailaddress($sourcemailaddress) {
+        $this->sourcemailaddress = $sourcemailaddress;
+    }
 
-//Set who the message is to be sent from
-$mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu Maffeis');
+    public function setSourcename($sourcename) {
+        $this->sourcename = $sourcename;
+    }
 
-//Set an alternative reply-to address
-$mail->addReplyTo('disciplinas.tadeu.maffeis@gmail.com', 'First Last');
+    public function setHtmlMessage($htmlMessage) {
+        $this->htmlMessage = $htmlMessage;
+    }
 
-//Set who the message is to be sent to
-$mail->addAddress('tadeu.maffeis@gmail.com', 'Tadeu Maffeis');
+    public function setAltMessage($altMessage) {
+        $this->altMessage = $altMessage;
+    }
 
-//Set the subject line
-$mail->Subject = 'PHPMailer GMail SMTP test';
+    public function setMailer($mailer) {
+        $this->mailer = $mailer;
+    }
 
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-$mail->msgHTML("<html><body><b>Hello</b></body></html>");
+    public function __construct($destemail) {
 
-//Replace the plain text body with one created manually
-$mail->AltBody = 'This is a plain-text message body';
+        $this->mailer = new PHPMailer();
+	
 
-//Attach an image file
-//$mail->addAttachment('images/phpmailer_mini.png');
+        $this->destinationemailaddress = $destemail;
+    }
 
-//send the message, check for errors
-if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
-} else {
-    echo "Message sent!";
-    //Section 2: IMAP
-    //Uncomment these to save your message in the 'Sent Mail' folder.
-    #if (save_mail($mail)) {
-    #    echo "Message saved!";
-    #}
+    public function prepare() {
+        $this->mailer->setFrom($this->sourcemailaddress, $this->sourcename);
+        $this->mailer->AddReplyTo($this->sourcemailaddress, $this->sourcename);
+        $this->mailer->addAddress($this->destinationemailaddress, $this->destinationname);
+        $this->mailer->Subject = $this->subject;
+        //
+        if ($this->htmlMessage != null) {
+            $this->mailer->MsgHTML($this->htmlMessage);
+        }
+        if ($this->altMessage == null) {
+            $this->mailer->AltBody = $this->altMessage;
+        }
+        $this->prepared = true;
+    }
+
+    public function send() {
+        $retValue = false;
+        if (!$this->prepared) {
+            return $retValue;
+        }
+
+        $this->mailer->SMTPDebug = 2;
+
+        if ($this->mailer->send()) {
+            $retValue = true;
+        }
+
+        return $retValue;
+    }
+
+    //put your code here
 }
 
-//Section 2: IMAP
-//IMAP commands requires the PHP IMAP Extension, found at: https://php.net/manual/en/imap.setup.php
-//Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
-//You can use imap_getmailboxes($imapStream, '/imap/ssl') to get a list of available folders or labels, this can
-//be useful if you are trying to get this working on a non-Gmail IMAP server.
-function save_mail($mail) {
-    //You can change 'Sent Mail' to any other folder or tag
-    $path = "{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail";
+/*
+$newpassword = "AAABBB";
+$mailer = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
+$mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
+echo "\nName = Disciplina Estrutura de Dados";
+$mailer->setSourcename("Disciplina Estrutura de Dados");
+echo "\nSubject = Disciplina Estrutura de Dados - Reset Password!";
+$mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
+$html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
+$html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
+$html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
+$mailer->setHtmlMessage($html);
+echo "\nhtml msg = " . $html;
+$mailer->prepare();
+echo "\nPrepare";
 
-    //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
-    $imapStream = imap_open($path, $mail->Username, $mail->Password);
+echo $mailer->send();
 
-    $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
-    imap_close($imapStream);
-
-    return $result;
-}
+ */
