@@ -140,7 +140,7 @@ class AAEmail {
         return $retValue;
     }
 
-    public function sendEmail($dest) {
+    public function sendEmail($dest,$html) {
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 2;
 	$mail->Host = 'smtp.atmapps.pro.br';
@@ -157,7 +157,7 @@ class AAEmail {
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
         $mail->addAddress($dest, 'Tadeu');
         $mail->Subject = 'PHPMailer mail() test';
-        $mail->msgHTML("<html><body><b>Teste</b></body></hmtl>", __DIR__);
+        $mail->msgHTML($html, __DIR__);
         $mail->AltBody = 'This is a plain-text message body';
 
 	try {
@@ -198,7 +198,7 @@ echo "\nhtml msg = " . $html;
 $mailer->prepare();
 echo "\nPrepare";
 
-echo $mailer->sendEmail("tadeu.maffeis@fatec.sp.gov.br");
+echo $mailer->sendEmail("tadeu.maffeis@fatec.sp.gov.br", $html);
 
 
 
