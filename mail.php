@@ -9,4 +9,6 @@ $success = mail('tadeu.maffeis@fatec.sp.gov.br', 'My Subject', $message);
 if (!$success) {
     $errorMessage = error_get_last()['message'];
 }
+
+echo '<b>' . $errorMessage . '<b> message!';
 ?>
