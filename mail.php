@@ -6,10 +6,12 @@
  */
 
 //Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+//use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\SMTP;
 
-require 'classes/vendor/autoload.php';
+//require 'classes/vendor/autoload.php';
+
+require_once 'classes/phpmailer/class.phpmailer.php';
 
 /**
  * Description of AAEmail
