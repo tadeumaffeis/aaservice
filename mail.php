@@ -1,4 +1,11 @@
 <?php
+
+
+echo mail("tadeu.maffeis@gmail.com", "Assunto", "Mensagem", "From: aaclassroom@atmapps.pro.br");
+
+die(0);
+
+
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
  * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
