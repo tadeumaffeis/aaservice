@@ -9,7 +9,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
-require 'vendor/autoload.php';
+require 'classes/vendor/autoload.php';
 
 /**
  * Description of AAEmail
