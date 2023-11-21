@@ -12,8 +12,8 @@ try {
     // Configurações do servidor de e-mail
     $mail->isSMTP();
     $mail->Host = 'smtp.atmapps.pro.br';
-    $mail->Port = 587; // A porta SMTP pode variar (587 é comum para TLS)
-    $mail->SMTPSecure = 'tls'; // Use 'tls' ou 'ssl' conforme necessário
+    $mail->Port = 587; 			// A porta SMTP pode variar (587 é comum para TLS)
+    $mail->SMTPSecure = 'tls'; 		// Use 'tls' ou 'ssl' conforme necessário
     $mail->SMTPAuth = true;
     $mail->Username = 'aaclassroom@atmapps.pro.br';
     $mail->Password = '@IA847atm';
@@ -28,7 +28,7 @@ try {
     $mail->send();
     echo 'E-mail enviado com sucesso!';
 } catch (Exception $e) {
-    echo 'Erro ao enviar e-mail: ', $mail->ErrorInfo;
+    echo 'Erro ao enviar e-mail: ' . $mail->ErrorInfo;
     var_dump($ex);
 }
 ?>
