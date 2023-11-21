@@ -108,18 +108,18 @@ class AAEmail {
     }
 
     public function prepare() {
-        $this->mailer->setFrom($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->AddReplyTo($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->addAddress($this->destinationemailaddress, $this->destinationname);
-        $this->mailer->Subject = $this->subject;
+        //$this->mailer->setFrom($this->sourcemailaddress, $this->sourcename);
+        //$this->mailer->AddReplyTo($this->sourcemailaddress, $this->sourcename);
+        //$this->mailer->addAddress($this->destinationemailaddress, $this->destinationname);
+        //$this->mailer->Subject = $this->subject;
         //
-        if ($this->htmlMessage != null) {
-            $this->mailer->MsgHTML($this->htmlMessage);
-        }
-        if ($this->altMessage == null) {
-            $this->mailer->AltBody = $this->altMessage;
-        }
-        $this->prepared = true;
+        //if ($this->htmlMessage != null) {
+        //    $this->mailer->MsgHTML($this->htmlMessage);
+        //}
+        //if ($this->altMessage == null) {
+        //    $this->mailer->AltBody = $this->altMessage;
+        //}
+        //$this->prepared = true;
     }
 
     public function send() {
