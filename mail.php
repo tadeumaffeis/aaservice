@@ -130,20 +130,21 @@ class AAEmail {
 }
 
 
+
 $newpassword = "AAABBB";
 $mailer = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
 $mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
-echo "\nName = Disciplina Estrutura de Dados";
+echo "\nName = Disciplina Estrutura de Dados<p>";
 $mailer->setSourcename("Disciplina Estrutura de Dados");
-echo "\nSubject = Disciplina Estrutura de Dados - Reset Password!";
+echo "\nSubject = Disciplina Estrutura de Dados - Reset Password!<p>";
 $mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
 $html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
 $html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
 $html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
 $mailer->setHtmlMessage($html);
-echo "\nhtml msg = " . $html;
+echo "\nhtml msg = " . $html . '<p>;
 $mailer->prepare();
-echo "\nPrepare";
+echo "\nPrepare <p>";
 
 echo $mailer->send();
 
