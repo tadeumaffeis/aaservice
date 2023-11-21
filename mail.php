@@ -54,7 +54,7 @@ $mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
 /*********************************** A PARTIR DAQUI NAO ALTERAR ************************************/
 
 
-require ('PHPMailer_5.2.4/class.phpmailer.php');
+require ('classes/phpmailer/class.phpmailer.php');
 
 
 $mail = new PHPMailer();
