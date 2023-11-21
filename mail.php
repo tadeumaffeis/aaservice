@@ -129,7 +129,7 @@ class AAEmail {
     //put your code here
 }
 
-/*
+
 $newpassword = "AAABBB";
 $mailer = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
 $mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
@@ -147,4 +147,3 @@ echo "\nPrepare";
 
 echo $mailer->send();
 
- */
