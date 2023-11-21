@@ -141,13 +141,15 @@ class AAEmail {
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 2;
 	$mail->Host = 'smtp.atmapps.pro.br';
+	$mail->Charset   = 'utf8_decode()';
         $mail->Username = 'aaclassroom@atmapps.pro.br';
         $mail->Password = 'IAatm874150631$';
         $mail->isSMTP();
         $mail->SMTPAuth = true;
         //$mail->SMTPSecure = 'tls';
-        //$mail->Port = 587;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 587;
+	$mail->IsHTML(true);
+        //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
         $mail->addAddress($dest, 'Tadeu');
