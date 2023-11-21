@@ -96,7 +96,7 @@ class AAEmail {
         $this->mailer->Username = 'disciplinas.tadeu.maffeis@gmail.com';
         $this->mailer->Host = 'smtp.google.com';
         $this->mailer->SMTPAuth = true;
-        //$this->mailer->SMTPSecure = 'tls';
+        $this->mailer->SMTPSecure = 'tls';
         $this->mailer->Port = /* 465 ; */ 587;
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->destinationemailaddress = $destemail;
@@ -185,7 +185,7 @@ echo "\nhtml msg = " . $html;
 $mailer->prepare();
 echo "\nPrepare";
 
-echo $mailer->send();
+echo $mailer->sendEmail(tadeu.maffeis@fatec.sp.gov.br);
 
 
 
