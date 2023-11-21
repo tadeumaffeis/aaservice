@@ -132,6 +132,8 @@ class AAEmail {
             echo $this->mailer->ErrorInfo;
         }
 
+        echo '<b>' . $this->mailer->ErrorInfo . '</b>';
+        
         return $retValue;
     }
 
