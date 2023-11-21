@@ -60,7 +60,9 @@ $mail = new PHPMailer();
 
 $mail->SMTPDebug = 2;
 
-$mail->IsSMTP();
+//$mail->IsSMTP();
+
+$mail->isMail();
 
 $mail->SMTPAuth  = true;
 
