@@ -164,10 +164,12 @@ class AAEmail {
         } catch (Exception $ex) {
           	var_dump($ex);
         }
-    }
+    
 
-    foreach (get_object_vars($mail) as $property => $value) {
-    	echo "$property: $value<br>";
+        foreach (get_object_vars($mail) as $property => $value) {
+    	   echo "$property: $value<br>";
+        }
+
     }
 
     //put your code here
