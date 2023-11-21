@@ -59,7 +59,9 @@ $mail->SMTPAuth  = true;
 
 $mail->Charset   = 'utf8_decode()';
 
-$mail->Host  = 'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
+$mail->Host  = "smtp.atmapps.pro.br";
+
+//'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
 
 $mail->Port  = '587';
 
