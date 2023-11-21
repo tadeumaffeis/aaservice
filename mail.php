@@ -21,7 +21,7 @@ try {
 
     // Configurações adicionais (opcional)
     $mail->setFrom('aaclassroom@atmapps.pro.br', 'AACLassroom');
-    $mail->addAddress('tadeu.maffeis@gmail.com', 'Tadeu');
+    $mail->addAddress('tadeu.maffeis@fatec.sp.gov.br', 'Tadeu');
     $mail->Subject = 'Teste';
     $mail->Body = 'Conteúdo do E-mail';
 
