@@ -185,7 +185,7 @@ echo "\nhtml msg = " . $html;
 $mailer->prepare();
 echo "\nPrepare";
 
-echo $mailer->sendEmail('tadeu.maffeis@fatec.sp.gov.br');
+echo $mailer->sendEmail("tadeu.maffeis@fatec.sp.gov.br");
 
 
 
