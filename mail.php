@@ -139,6 +139,7 @@ class AAEmail {
     public function sendEmail($dest) {
 
         $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 2;
 	$mail->Host = 'smtp.atmapps.pro.br';
         $mail->Username = 'aaclassroom@atmapps.pro.br';
         $mail->Password = 'IAatm874150631$';
@@ -147,7 +148,6 @@ class AAEmail {
         //$this->mailer->SMTPSecure = 'tls';
         $this->mailer->Port = 587;
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->SMTPDebug = 2;
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
         $mail->addAddress($dest, 'Tadeu');
@@ -164,6 +164,10 @@ class AAEmail {
         } catch (Exception $ex) {
           	var_dump($ex);
         }
+    }
+
+    foreach (get_object_vars($mail) as $property => $value) {
+    	echo "$property: $value<br>";
     }
 
     //put your code here
