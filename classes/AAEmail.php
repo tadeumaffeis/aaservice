@@ -25,7 +25,7 @@ class AAEmail {
     private $sourcename = null;
     private $htmlMessage = null;
     private $altMessage = null;
-    private $mailer = null;
+    private $mail = null;
     private $subject = null;
 
     public function getSubject() {
@@ -61,7 +61,7 @@ class AAEmail {
     }
 
     public function getMailer() {
-        return $this->mailer;
+        return $this->mail;
     }
 
     public function setDestinationemailaddress($destinationemailaddress) {
@@ -82,108 +82,101 @@ class AAEmail {
 
     public function setHtmlMessage($htmlMessage) {
         $this->htmlMessage = $htmlMessage;
+        $this->mail->msgHTML($htmlMessage, __DIR__);
     }
 
     public function setAltMessage($altMessage) {
         $this->altMessage = $altMessage;
     }
 
+    public function addAddress($dest, $name = "Anonymous") {
+        $this->mail->addAddress($dest, $name);
+    }
+
     public function __construct($destemail) {
 
-        $this->mailer = new PHPMailer(true);
-        $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
-        $this->mailer->isSMTP();
-        $this->mailer->Username = 'disciplinas.tadeu.maffeis@gmail.com';
-        $this->mailer->Host = 'smtp.google.com';
-        $this->mailer->SMTPAuth = true;
-        //$this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = /* 465 ; */ 587;
-        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->destinationemailaddress = $destemail;
-        $this->mailer->Password = 'IAatm874150631$';
+        $this->mail                 = new PHPMailer(true);
+        $this->mail->SMTPDebug      = 2;
+        $this->mail->Host           = 'smtp.atmapps.pro.br';
+        $this->mail->Username       = 'aaclassroom@atmapps.pro.br';
+        $this->mail->Password       = '@IA847atm';
+        $this->mail->isSMTP();
+        $this->mail->SMTPAuth       = true;
+        //$this->mail->SMTPSecure   = 'tls';
+        $this->mail->Port           = 587;
+        $this->mail->IsHTML(true);
+        //$this->mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mail->CharSet        = 'UTF-8';
+        $this->mail->setFrom('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
+        $this->mail->addReplyTo('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
+        $this->mail->Subject = 'Recuperação de Senha AAClassroom';
+
+        /*
+          $this->mail = new PHPMailer(true);
+          $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
+          $this->mail->isSMTP();
+          $this->mail->Username = 'disciplinas.tadeu.maffeis@gmail.com';
+          $this->mail->Host = 'smtp.google.com';
+          $this->mail->SMTPAuth = true;
+          //$this->mail->SMTPSecure = 'tls';
+          $this->mail->Port = 465 ;  587;
+          $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+          $this->destinationemailaddress = $destemail;
+          $this->mail->Password = 'IAatm874150631$';
+         */
     }
 
     public function prepare() {
-        $this->mailer->setFrom($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->AddReplyTo($this->sourcemailaddress, $this->sourcename);
-        $this->mailer->addAddress($this->destinationemailaddress, $this->destinationname);
-        $this->mailer->Subject = $this->subject;
+        //$this->mail->setFrom($this->sourcemailaddress, $this->sourcename);
+        $this->mail->AddReplyTo($this->sourcemailaddress, $this->sourcename);
+        $this->mail->addAddress($this->destinationemailaddress, $this->destinationname);
+        $this->mail->Subject = $this->subject;
         //
         if ($this->htmlMessage != null) {
-            $this->mailer->MsgHTML($this->htmlMessage);
+            $this->mail->MsgHTML($this->htmlMessage);
         }
         if ($this->altMessage == null) {
-            $this->mailer->AltBody = $this->altMessage;
+            $this->mail->AltBody = $this->altMessage;
         }
         $this->prepared = true;
     }
 
     public function send() {
         $retValue = false;
-        var_dump($this->mailer);
+        var_dump($this->mail);
         if (!$this->prepared) {
             return $retValue;
         }
 
-        if ($this->mailer->send()) {
+        if ($this->mail->send()) {
             $retValue = true;
         } else {
-            echo $this->mailer->ErrorInfo;
+            echo $this->mail->ErrorInfo;
         }
 
-        echo '<b>' . $this->mailer->ErrorInfo . '</b>';
-        
+        echo '<b>' . $this->mail->ErrorInfo . '</b>';
+
         return $retValue;
     }
 
-    public function sendEmail($dest) {
-
-
-//Create a new PHPMailer instance
-        $mail = new PHPMailer();
-//Set who the message is to be sent from
-        $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
-//Set an alternative reply-to address
-        $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
-//Set who the message is to be sent to
-        $mail->addAddress($dest, 'Tadeu');
-//Set the subject line
-        $mail->Subject = 'PHPMailer mail() test';
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-        $mail->msgHTML("<html><body><b>Teste</b></body></hmtl>", __DIR__);
-//Replace the plain text body with one created manually
-        $mail->AltBody = 'This is a plain-text message body';
-//Attach an image file
-        //$mail->addAttachment('images/phpmailer_mini.png');
-
-//send the message, check for errors
-        if (!$mail->send()) {
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            echo 'Message sent!';
-        }
-    }
-
-    //put your code here
 }
 
 /*
 $newpassword = "AAABBB";
-$mailer = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
-$mailer->setSourcemailaddress("ed.ads.fitu@atmapps.pro.br");
+$mail = new AAEmail("tadeu.maffeis@fatec.sp.gov.br");
+$mail->setSourcemailaddress("ed.ads.fitu@atmapps.pro.br");
 echo "\nName = Disciplina Estrutura de Dados";
-$mailer->setSourcename("Disciplina Estrutura de Dados");
+$mail->setSourcename("Disciplina Estrutura de Dados");
 echo "\nSubject = Disciplina Estrutura de Dados - Reset Password!";
-$mailer->setSubject("Disciplina Estrutura de Dados - Reset Password!");
+$mail->setSubject("Disciplina Estrutura de Dados - Reset Password!");
 $html = "<html><body>Código: <b>" . $newpassword . "</b><p>";
 $html .= "<b>Clique no linK abaixo para resetar sua senha</b></p><p>";
 $html .= "http://www.classroom.atmapps.pro.br/ED/?resetpassword";
-$mailer->setHtmlMessage($html);
+$mail->setHtmlMessage($html);
 echo "\nhtml msg = " . $html;
-$mailer->prepare();
+$mail->prepare();
 echo "\nPrepare";
 
-echo $mailer->send();
+echo $mail->send();
 
  */
