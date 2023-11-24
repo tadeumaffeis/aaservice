@@ -148,7 +148,7 @@ class AAEmail {
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 2;
 	$mail->Host = 'smtp.atmapps.pro.br';
-	$mail->Charset   = 'utf8_decode()';
+	$mail->Charset   = 'utf8_encode()';
         $mail->Username = 'aaclassroom@atmapps.pro.br';
         $mail->Password = '@IA847atm';
         $mail->isSMTP();
