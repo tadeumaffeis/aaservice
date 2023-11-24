@@ -143,18 +143,13 @@ class AAEmail {
 
     public function send() {
         $retValue = false;
-        var_dump($this->mail);
         if (!$this->prepared) {
             return $retValue;
         }
 
         if ($this->mail->send()) {
             $retValue = true;
-        } else {
-            echo $this->mail->ErrorInfo;
-        }
-
-        echo '<b>' . $this->mail->ErrorInfo . '</b>';
+        } 
 
         return $retValue;
     }
