@@ -37,14 +37,12 @@ class AASqlTransactionResetPassword {
         if ($stmt) {
             $stmt->bind_param("s", $this->login); // "s" representa uma string, ajuste conforme necessário
             if ($stmt->execute()) {
-                echo "Update realizado com sucesso" . PHP_EOL;
+                $this->error = false;
             } else {
-                echo "Update erro: " . $stmt->error . PHP_EOL;
                 $this->error = true;
             }
-            $stmt->close(); // Fechar a declaração
+            $stmt->close(); 
         } else {
-            echo "Update erro: " . $stmt->error . PHP_EOL;
             $this->error = true;
         }
 
@@ -53,23 +51,19 @@ class AASqlTransactionResetPassword {
         if ($stmt) {
             $stmt->bind_param("ss", $this->login, $this->passwordHash); // "s" representa uma string, ajuste conforme necessário
             if ($stmt->execute()) {
-                echo "Insert realizado com sucesso" . PHP_EOL;
-            } else {
-                echo "Insert erro: " . $stmt->error . " " . $stmt->errno. PHP_EOL;
+                $this->error = false;
+            } else {                
                 $this->error = true;
             }
             $stmt->close(); // Fechar a declaração
         } else {
-            echo "Insert erro: " . $stmt->error . PHP_EOL;
             $this->error = true;
         }
 
         if (!$this->error) {
-            mysqli_commit($this->connection);
-            echo "Commit realizado com sucesso" . PHP_EOL;
+            mysqli_commit($this->connection);    
         } else {
             mysqli_rollback($this->connection);
-            echo "Rollback realizado com sucesso" . PHP_EOL;
         }
 
         return (!$this->error); // returns true if no error ocurred
