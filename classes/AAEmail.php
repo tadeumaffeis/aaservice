@@ -110,7 +110,7 @@ class AAEmail {
         $this->mail->setFrom('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
         $this->mail->addReplyTo('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
         $this->mail->Subject = 'Recuperação de Senha AAClassroom';
-
+        $this->addAddress($destemail);
         /*
           $this->mail = new PHPMailer(true);
           $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -128,9 +128,9 @@ class AAEmail {
 
     public function prepare() {
         //$this->mail->setFrom($this->sourcemailaddress, $this->sourcename);
-        $this->mail->AddReplyTo($this->sourcemailaddress, $this->sourcename);
-        $this->mail->addAddress($this->destinationemailaddress, $this->destinationname);
-        $this->mail->Subject = $this->subject;
+        //$this->mail->AddReplyTo($this->sourcemailaddress, $this->sourcename);
+        //$this->mail->addAddress($this->destinationemailaddress, $this->destinationname);
+        //$this->mail->Subject = $this->subject;
         //
         if ($this->htmlMessage != null) {
             $this->mail->MsgHTML($this->htmlMessage);
