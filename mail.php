@@ -147,8 +147,7 @@ class AAEmail {
     public function sendEmail($dest,$html) {
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 2;
-	$mail->Host = 'smtp.atmapps.pro.br';
-	$mail->Charset   = 'UTF-8';
+	$mail->Host = 'smtp.atmapps.pro.br';  
         $mail->Username = 'aaclassroom@atmapps.pro.br';
         $mail->Password = '@IA847atm';
         $mail->isSMTP();
@@ -157,6 +156,7 @@ class AAEmail {
         $mail->Port = 587;
 	$mail->IsHTML(true);
         //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->CharSet = 'UTF-8';
         $mail->setFrom('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
         $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
         $mail->addAddress($dest, 'Anonymous');
