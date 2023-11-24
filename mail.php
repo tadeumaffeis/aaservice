@@ -6,12 +6,12 @@
  */
 
 //Import PHPMailer classes into the global namespace
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
-//require 'classes/vendor/autoload.php';
+require 'classes/vendor/autoload.php';
 
-require_once 'classes/phpmailer/class.phpmailer.php';
+//require_once 'classes/phpmailer/class.phpmailer.php';
 
 /**
  * Description of AAEmail
@@ -139,6 +139,10 @@ class AAEmail {
         
         return $retValue;
     }
+    
+    public function setLoginUserInfo($b64login, $b64password) {
+        
+    }
 
     public function sendEmail($dest,$html) {
         $mail = new PHPMailer(true);
@@ -153,12 +157,13 @@ class AAEmail {
         $mail->Port = 587;
 	$mail->IsHTML(true);
         //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->setFrom('aaclassroom@atmapps.pro.br', 'Tadeu');
-        $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'First Last');
-        $mail->addAddress($dest, 'Tadeu');
-        $mail->Subject = 'PHPMailer mail() test';
+        $mail->setFrom('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
+        $mail->addReplyTo('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
+        $mail->addAddress($dest, 'Anonymous');
+        $mail->Subject = 'Recuperação de Senha AAClassroom';
         $mail->msgHTML($html, __DIR__);
-        $mail->AltBody = 'This is a plain-text message body';
+        
+        $mail->AltBody = $html;
 
 	try {
         	if (!$mail->send()) {
