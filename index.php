@@ -115,7 +115,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 $mailer = new AAEmail($json_array['username']);
                 $mailer->setSourcemailaddress("aaclassroom@atmapps.pro.br");
                 $mailer->setSourcename("Disciplinas ADS-AMS");
-                $mailer->setSubject("Disciplinas - Reset Password!");
+                $mailer->setSubject("[AAClassroom] Reset Password");
                 $html = "<html><head><meta charset=\"UTF-8\"></head><body>Código: <b>" . $newpassword . "</b><p>";
                 $html .= "<b>Este é o código para você realizar a redefinição de sua senha!</b></p><p>";
                 $html .= "</body></html>";
