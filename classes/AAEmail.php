@@ -107,8 +107,8 @@ class AAEmail {
         $this->mail->IsHTML(true);
         //$this->mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->CharSet        = 'UTF-8';
-        $this->mail->setFrom('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
-        $this->mail->addReplyTo('aaclassroom@atmapps.pro.br', 'Antonio Tadeu Maffeis');
+        $this->mail->setFrom('aaclassroom@atmapps.pro.br', '[AAClassroom] Alteração de senha');
+        $this->mail->addReplyTo('aaclassroom@atmapps.pro.br', '[AAClassroom] Alteração de senha');
         $this->mail->Subject = 'Recuperação de Senha AAClassroom';
         $this->addAddress($destemail);
         /*

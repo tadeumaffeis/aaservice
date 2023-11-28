@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS "AAAssignmentsFinished" (
   "student_ar" 		VARCHAR(20) 	NOT NULL,
   "content" 		LONGBLOB 	NOT NULL,
   PRIMARY KEY ("course_id","subject_id","assignment_id","student_ar"),
-  FOREIGN KEY ("assignment_id") REFERENCES "AAAssignment" ("assignment_id"),
+  FOREIGN KEY ("assignment_id") REFERENCES "AAAssignments" ("assignment_id"),
   FOREIGN KEY ("course_id", "subject_id", "student_ar") REFERENCES "AAEnrolled" ("course_id", "subject_id", "student_ar")
 );
 
