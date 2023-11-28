@@ -77,7 +77,7 @@ class AASqlTransactionWriteAssignmentFinished {
             if (mysqli_errno($this->connection) == 1062) {
                 throw new Exception("Duplicated primary key",1062);
             } else {
-                throw new Exception("intrnal error",500);
+                throw new Exception("internal error: " . mysqli_errno($this->connection)  ,500);
             }
         }
 
