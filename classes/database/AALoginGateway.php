@@ -82,19 +82,63 @@ class AALoginGateway {
     }
 
     public function getStudentData() {
-        $sqlJoin = "SELECT e.course_id, s.initials, st.student_ar, st.name, st.email FROM AAStudents as st "
-                . "INNER JOIN aaenrolled as e "
-                . "INNER JOIN aasubject as s "
-                . "INNER JOIN aalogin as l on l.username = st.email AND st.student_ar = e.student_ar AND s.initials = e.subject_id "
-                . "WHERE l.username = '" . $this->login . "'";
-        //$stmt = $this->connection->query($sqlJoin);
-        //$result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $result = mysqli_query($this->connection, $sqlJoin);
-        $dataSet = $result->fetch_array(MYSQLI_ASSOC);
+        // Utilizando prepared statement para evitar injeção de SQL
+        $sqlJoin = "SELECT e.course_id, s.initials, st.student_ar, st.name, st.email 
+                FROM AAStudents as st 
+                INNER JOIN aaenrolled as e ON st.student_ar = e.student_ar
+                INNER JOIN aasubject as s ON s.initials = e.subject_id
+                INNER JOIN aalogin as l ON l.username = st.email
+                WHERE l.username = ?";
+
+        // Preparando a declaração
+        $stmt = mysqli_prepare($this->connection, $sqlJoin);
+
+        // Verificando se a preparação foi bem-sucedida
+        if (!$stmt) {
+            die("Falha na preparação da declaração: " . mysqli_error($this->connection));
+        }
+
+        // Substituindo o parâmetro por seu valor real
+        mysqli_stmt_bind_param($stmt, "s", $this->login);
+
+        // Executando a consulta
+        mysqli_stmt_execute($stmt);
+
+        // Obtendo o resultado
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Verificando se a execução foi bem-sucedida
+        if (!$result) {
+            throw new Exception("Falha na execução da consulta: " . mysqli_error($this->connection));
+        }
+
+        // Obtendo os dados como um array associativo
+        $dataSet = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        // Fechando a declaração
+        mysqli_stmt_close($stmt);
+
         return $dataSet;
     }
 
+    /*
+      public function getStudentData() {
+
+      $sqlJoin = "SELECT e.course_id, s.initials, st.student_ar, st.name, st.email FROM AAStudents as st "
+      . "INNER JOIN aaenrolled as e "
+      . "INNER JOIN aasubject as s "
+      . "INNER JOIN aalogin as l on l.username = st.email AND st.student_ar = e.student_ar AND s.initials = e.subject_id "
+      . "WHERE l.username = '" . $this->login . "'";
+      //$stmt = $this->connection->query($sqlJoin);
+      //$result = $stmt->fetch(PDO::FETCH_ASSOC);
+      $result = mysqli_query($this->connection, $sqlJoin);
+      $dataSet = $result->fetch_array(MYSQLI_ASSOC);
+      return $dataSet;
+      }
+     */
+
     public function validadeUserName() {
+
         $sqlJoin = "SELECT aastudents.student_ar, aastudents.name, aastudents.email, aalogin.username, aalogin.password"
                 . " FROM aastudents INNER JOIN aalogin on aalogin.username = aastudents.email"
                 . " WHERE aalogin.username = '" . $this->login . "'";
