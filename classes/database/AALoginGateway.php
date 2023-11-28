@@ -84,7 +84,7 @@ class AALoginGateway {
     public function getStudentData() {
         // Utilizando prepared statement para evitar injeção de SQL
         $sqlJoin = "SELECT e.course_id, s.initials, st.student_ar, st.name, st.email 
-                FROM AAStudents as st 
+                FROM aastudents as st 
                 INNER JOIN aaenrolled as e ON st.student_ar = e.student_ar
                 INNER JOIN aasubject as s ON s.initials = e.subject_id
                 INNER JOIN aalogin as l ON l.username = st.email
