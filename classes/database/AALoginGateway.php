@@ -95,7 +95,7 @@ class AALoginGateway {
 
         // Verificando se a preparação foi bem-sucedida
         if (!$stmt) {
-            die("Falha na preparação da declaração: " . mysqli_error($this->connection));
+            throw new Exception("Falha na preparação da declaração: " . mysqli_error($this->connection));
         }
 
         // Substituindo o parâmetro por seu valor real

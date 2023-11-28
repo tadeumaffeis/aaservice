@@ -169,16 +169,20 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
             $json_received = base64_decode(filter_input(INPUT_POST, 'json'));
             $json_array = json_decode($json_received, true);
             $loginUser = new LoginUser($json_array['username'], $json_array['passwordHash'], $json_array['code']);
-            $result = $loginUser->getStudentData();
-            if (!is_array($result) || $result == null || !$result) {
-                $jsonObj = new ReturnMessage(400, 'Error on get data');
-            } else {
-                $array_result = array();
-                foreach ($result as $key => $value) {
-                    $array_result[$key] = $value;
+            try {
+                $result = $loginUser->getStudentData();
+                if (!is_array($result) || $result == null || !$result) {
+                    $jsonObj = new ReturnMessage(400, 'Error on get data');
+                } else {
+                    $array_result = array();
+                    foreach ($result as $key => $value) {
+                        $array_result[$key] = $value;
+                    }
+                    $jsonObj = new ReturnMessage(200, 'Sucessfull');
+                    $jsonObj->add("data", json_encode($array_result));
                 }
-                $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
-                $jsonObj->add("data", json_encode($array_result));
+            } catch (Exception $ex) {
+                $jsonObjnew = new ReturnMessage(400, 'Error on get data');
             }
             echo $jsonObj->toJSON();
             break;
