@@ -170,19 +170,15 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
             $json_array = json_decode($json_received, true);
             $loginUser = new LoginUser($json_array['username'], $json_array['passwordHash'], $json_array['code']);
             $result = $loginUser->getStudentData();
-            $array_result = array();
-            foreach ($result as $key => $value) {
-                $array_result[$key] = $value;
-            }
-            if ($result < 0) {
-                $jsonObj = new ReturnMessage(404, 'Invalid code');
+            if (!is_array($result) || $result == null || !$result) {
+                $jsonObj = new ReturnMessage(400, 'Error on get data');
             } else {
-                if ($result) {
-                    $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
-                    $jsonObj->add("data", json_encode($array_result));
-                } else {
-                    $jsonObj = new ReturnMessage(400, 'Error change to password');
+                $array_result = array();
+                foreach ($result as $key => $value) {
+                    $array_result[$key] = $value;
                 }
+                $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
+                $jsonObj->add("data", json_encode($array_result));
             }
             echo $jsonObj->toJSON();
             break;
@@ -287,10 +283,10 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
         }
 
     case "debug" : {
-        //$mailer = new AAEmail('tadeu.maffeis@gmail.com');
-        //$mailer->sendEmail('tadeu.maffeis@gmail.com');
-    
-        
+//$mailer = new AAEmail('tadeu.maffeis@gmail.com');
+//$mailer->sendEmail('tadeu.maffeis@gmail.com');
+
+
             echo "<b>Version 1.0 - </b>" . date('m-d-Y h:i:s a', time()) . "\n\n\n";
             $mailer = new AAEmail('tadeu.maffeis@gmail.com');
             $mailer->setSourcemailaddress("disciplinas.tadeu.maffeis@gmail.com");
@@ -306,46 +302,46 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
             } else {
                 $jsonObj = new ReturnMessage(404, 'Reset password failure');
             }
-    }
-    echo $jsonObj->toJSON();
-    /*
+        }
+        echo $jsonObj->toJSON();
+        /*
 
-      $obj = new AASqlTransactionGetStudentClassAssignment('tadeu.maffeis@fatec.sp.gov.br', "");
-      $jsonStr = $obj->run();
+          $obj = new AASqlTransactionGetStudentClassAssignment('tadeu.maffeis@fatec.sp.gov.br', "");
+          $jsonStr = $obj->run();
 
-      echo $jsonStr;
+          echo $jsonStr;
 
-      break;
-
-
-      $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br", "AAAAAA", "95de8b4c24");
-
-      $result = $loginUser->updateTempPassword();
-
-      if ($result < 0) {
-      $jsonObj = new ReturnMessage(404, 'invalid code');
-      } else {
-      if ($result) {
-      $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
-      } else {
-      $jsonObj = new ReturnMessage(400, 'Error change to password');
-      }
-      }
-
-      echo $jsonObj->toJSON();
+          break;
 
 
-      /*
-      $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br");
-      $result = $loginUser->existTempPassword();
+          $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br", "AAAAAA", "95de8b4c24");
 
-      if ($result) {
-      echo "\n\n***(Sucesso) Existe temppassword</p>";
-      } else {
-      echo "\n\n***Erro</p>";
-      }
-     */
-    break;
+          $result = $loginUser->updateTempPassword();
+
+          if ($result < 0) {
+          $jsonObj = new ReturnMessage(404, 'invalid code');
+          } else {
+          if ($result) {
+          $jsonObj = new ReturnMessage(200, 'Password changed with sucess');
+          } else {
+          $jsonObj = new ReturnMessage(400, 'Error change to password');
+          }
+          }
+
+          echo $jsonObj->toJSON();
+
+
+          /*
+          $loginUser = new LoginUser("tadeu.maffeis@fatec.sp.gov.br");
+          $result = $loginUser->existTempPassword();
+
+          if ($result) {
+          echo "\n\n***(Sucesso) Existe temppassword</p>";
+          } else {
+          echo "\n\n***Erro</p>";
+          }
+         */
+        break;
 }
 /*
   $json_array = json_decode(base64_decode(filter_input(INPUT_POST, 'json'), true), true);
@@ -408,10 +404,9 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
  * 
  */
 
-
 function debug($maiiler) {
 
-$mailer->getHtmlMessage();
+    $mailer->getHtmlMessage();
 
-die();
+    die();
 }
