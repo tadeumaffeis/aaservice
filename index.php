@@ -256,7 +256,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 echo $jsonObj->toJSON();
                 die();
             }
-
+ 
             $json_received = base64_decode(filter_input(INPUT_POST, 'json'));
             $json_array = json_decode($json_received, true);
             $loginUser = new LoginUser($json_array['username'], $json_array['passwordHash'], $json_array['code']);
