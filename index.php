@@ -251,9 +251,6 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
         }
 
     case "sendassignment" : {
-            $jsonObj = new ReturnMessage(500, 'Delivery deadline closed');
-
-            return $jsonObj->toJSON();
 
             if (!filter_has_var(INPUT_POST, 'json')) {
                 $jsonObj = new ReturnMessage(400, 'No login information');
@@ -280,7 +277,7 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
                 }
                 $jsonObj->add("data", base64_encode(iconv('ISO-8859-1', 'UTF-8', $result)));
             } catch (Exception $ex) {
-                $jsonObj = new ReturnMessage($ex->getCode(), $ex->getMessage());
+                $jsonObj = new ReturnMessage($ex->getCode(), $ex->getMessage() . " - Erro na inserção " . implode(", ",$assignmentInfo));
             }
 
             echo $jsonObj->toJSON();

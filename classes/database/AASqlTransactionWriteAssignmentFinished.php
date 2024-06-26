@@ -20,7 +20,7 @@ class AASqlTransactionWriteAssignmentFinished {
 
     public function __construct($_username = null, $_assignmentInfo = null) {
         $dbpdoconn = AAConnectDB::getInstance();
-        //$this->connection = mysqli_connect("aadb.mysql.uhserver.com", "aadbuser", "@ia847atm", "aadb");
+        //$this->connection = mysqli_connect("aadb.mysql.uhserver.com", "aadbuser", "@IA847atm", "aadb");
         $this->assignmentInfo = $_assignmentInfo;
         $this->connection = mysqli_connect($dbpdoconn->getHost(), $dbpdoconn->getUser(), $dbpdoconn->getPassword(), $dbpdoconn->getDBName());
         mysqli_autocommit($this->connection, false);
@@ -51,7 +51,7 @@ class AASqlTransactionWriteAssignmentFinished {
             }
         }
 
-        $sqlIns = "INSERT INTO aaassignmentsfinished VALUES ("
+        $sqlIns = "INSERT INTO aaassignmentsfinished (`course_id`,`subject_id`,`assignment_id`,`student_ar`,`content`) VALUES ("
                 . $this->assignmentInfo['course_id']
                 . ",'"
                 . $this->assignmentInfo['subject_id']
@@ -62,7 +62,7 @@ class AASqlTransactionWriteAssignmentFinished {
                 . "','"
                 . $this->assignmentInfo['content']
                 . "')";
-
+     
         $this->error = false;
         $this->code = 200;
         $stmt = mysqli_prepare($this->connection, $sqlIns);
