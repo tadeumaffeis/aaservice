@@ -1,0 +1,153 @@
+# depslib dependency file v1.0
+1679940227 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\bubblesort.cpp
+	<iostream>
+	"Functions.h"
+
+1680012784 c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\functions.h
+
+1679939801 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\functions.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<Windows.h>
+
+1680013363 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\main.cpp
+	<iostream>
+	"Functions.h"
+
+1679939934 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\selectionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679938972 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\heapsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679940025 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\insertionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679937798 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\quicksort.cpp
+	<iostream>
+	"Functions.h"
+
+1680014181 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms\minmaxsort.cpp
+	<iostream>
+	<climits>
+	"Functions.h"
+
+1679940228 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\bubblesort.cpp
+	<iostream>
+	"Functions.h"
+
+1680720007 c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\functions.h
+
+1679939802 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\functions.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<Windows.h>
+
+1679938974 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\heapsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679940026 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\insertionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1680720142 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\main.cpp
+	<iostream>
+	"Functions.h"
+
+1680196194 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\minmaxsort.cpp
+	<iostream>
+	<climits>
+	"Functions.h"
+
+1679937800 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\quicksort.cpp
+	<iostream>
+	"Functions.h"
+
+1679939936 source:c:\users\labfatec\documents\codeblocks\sortalgorithms_v3\selectionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679940228 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\bubblesort.cpp
+	<iostream>
+	"Functions.h"
+
+1683133935 c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\functions.h
+
+1680720168 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\functions.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<Windows.h>
+
+1683135053 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\heapsort.cpp
+	<iostream>
+	"Functions.h"
+
+1683134600 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\insertionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1683134575 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\main.cpp
+	<iostream>
+	"Functions.h"
+
+1680196196 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\minmaxsort.cpp
+	<iostream>
+	<climits>
+	"Functions.h"
+
+1679937800 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\quicksort.cpp
+	<iostream>
+	"Functions.h"
+
+1679939936 source:c:\users\tadeu maffeis\onedrive - fatec centro paula souza\documents\codeblocks\sortalgorithms_v3\selectionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1679940228 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\bubblesort.cpp
+	<iostream>
+	"Functions.h"
+
+1701099507 c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\functions.h
+
+1701099866 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\functions.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<Windows.h>
+
+1683135053 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\heapsort.cpp
+	<iostream>
+	"Functions.h"
+
+1683134600 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\insertionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1701099839 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\minmaxsort.cpp
+	<iostream>
+	<climits>
+	"Functions.h"
+
+1679937800 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\quicksort.cpp
+	<iostream>
+	"Functions.h"
+
+1679939936 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\selectionsort.cpp
+	<iostream>
+	"Functions.h"
+
+1701099629 source:c:\users\tadeu maffeis\documents\codeblocks\sortalgorithms_v3\main.cpp
+	<iostream>
+	"Functions.h"
+
