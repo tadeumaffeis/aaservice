@@ -251,10 +251,6 @@ switch (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
         }
 
     case "sendassignment" : {
-            $jsonObj = new ReturnMessage(500, 'Delivery deadline closed');
-
-            return $jsonObj->toJSON();
-
             if (!filter_has_var(INPUT_POST, 'json')) {
                 $jsonObj = new ReturnMessage(400, 'No login information');
                 echo $jsonObj->toJSON();
